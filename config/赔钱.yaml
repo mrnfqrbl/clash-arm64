@@ -1,0 +1,227 @@
+proxy-providers:
+  赔钱-1:
+    type: http
+    path: "./proxy_provider/赔钱-1.yaml"
+    filter: "🇩🇪|🇬🇧|🇫🇷|🇺🇸|🇮🇳|🇯🇵|🇸🇬|🇦🇺|🇰🇷|🇧🇷|🇦🇪"
+    url: "https://pqjc.site/api/v1/client/subscribe?token=b462d5ee2cd8bca818ca03ed9aee2416"
+    interval: 80000
+    health-check:
+      enable: true
+      url: "https://cp.cloudflare.com/generate_204"
+      interval: 300
+proxy-groups:
+  - name: Auto - UrlTest
+    type: url-test
+    use:
+      - 赔钱-1
+    url: http://cp.cloudflare.com/generate_204
+    interval: "600"
+    tolerance: "150"
+  - name: Proxy
+    type: select
+    proxies:
+      - Auto - UrlTest
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Domestic
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+  - name: Others
+    type: select
+    proxies:
+      - Proxy
+      - DIRECT
+      - Domestic
+  - name: Microsoft
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+  - name: OpenAI
+    type: select
+    proxies:
+      - Proxy
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Apple
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+    use:
+      - 赔钱-1
+  - name: Apple TV
+    type: select
+    proxies:
+      - Proxy
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Google FCM
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+    use:
+      - 赔钱-1
+  - name: Scholar
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+    use:
+      - 赔钱-1
+  - name: Bilibili
+    type: select
+    proxies:
+      - Asian TV
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Bahamut
+    type: select
+    proxies:
+      - Global TV
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: HBO Max
+    type: select
+    proxies:
+      - Global TV
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: HBO Go
+    type: select
+    proxies:
+      - Global TV
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Pornhub
+    type: select
+    proxies:
+      - Global TV
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Netflix
+    type: select
+    proxies:
+      - Global TV
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Disney
+    type: select
+    proxies:
+      - Global TV
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Youtube
+    type: select
+    disable-udp: true
+    proxies:
+      - Global TV
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Discovery Plus
+    type: select
+    proxies:
+      - Global TV
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: DAZN
+    type: select
+    proxies:
+      - Global TV
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Spotify
+    type: select
+    proxies:
+      - Global TV
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Steam
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+    use:
+      - 赔钱-1
+  - name: miHoYo
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+    use:
+      - 赔钱-1
+  - name: AdBlock
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+      - Proxy
+    use:
+      - 赔钱-1
+  - name: Asian TV
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+    use:
+      - 赔钱-1
+  - name: Global TV
+    type: select
+    proxies:
+      - Proxy
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Speedtest
+    type: select
+    proxies:
+      - Proxy
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Telegram
+    type: select
+    proxies:
+      - Proxy
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Crypto
+    type: select
+    proxies:
+      - Proxy
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: Discord
+    type: select
+    proxies:
+      - Proxy
+      - DIRECT
+    use:
+      - 赔钱-1
+  - name: PayPal
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+    use:
+      - 赔钱-1
+rules:
